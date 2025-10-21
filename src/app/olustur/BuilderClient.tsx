@@ -332,7 +332,13 @@ export default function BuilderClient() {
                 <button type="button" onClick={() => setStep(((step + 1) as 1|2|3|4|5))} className="h-10 rounded-md bg-brand px-5 text-sm font-semibold text-white hover:bg-brand-700">İleri</button>
               ) : (
                 <button onClick={async () => {
-                  const payload = { bride, groom, type, date, dateText, locationText, bgUrl, messageText, noteText, createdAt: new Date().toISOString(), accentColor, textColor, fontFamily, nameScale, letterSpacing, lineHeight, radius, countdownScale, uppercaseEvent };
+                  const createdAt = new Date().toISOString();
+                  const payload = { bride, groom, type, date, dateText, locationText, bgUrl, messageText, noteText, createdAt,
+                    // Persist explicit values so public page doesn't fall back to theme defaults
+                    accentColor: accentColor || '#cfae62',
+                    textColor: textColor || '#2b2b2b',
+                    fontFamily: fontFamily || '',
+                    nameScale, letterSpacing, lineHeight, radius, countdownScale, uppercaseEvent };
                   try {
                     // Local cache
                     const raw = localStorage.getItem("demo_invites");
@@ -346,6 +352,13 @@ export default function BuilderClient() {
                     const res = await fetch('/api/invites', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
                     const json = await res.json();
                     if (json?.slug) {
+                      // update local cache with slug so profile shares canonical URL
+                      try {
+                        const raw2 = localStorage.getItem('demo_invites');
+                        const list2 = raw2 ? JSON.parse(raw2) : [];
+                        const idx = list2.findIndex((it: any) => it.createdAt === createdAt && it.bride === bride && it.groom === groom);
+                        if (idx >= 0) { list2[idx] = { ...list2[idx], slug: json.slug }; localStorage.setItem('demo_invites', JSON.stringify(list2)); window.dispatchEvent(new CustomEvent('invites:changed')); }
+                      } catch {}
                       router.push(`/v/${json.slug}`);
                       return;
                     }
