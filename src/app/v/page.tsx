@@ -53,19 +53,8 @@ export default function PublicInvitePage() {
     );
   }
 
-  const {
-    bride,
-    groom,
-    type,
-    date,
-    dateText,
-    locationText,
-    bgUrl,
-    messageText,
-    noteText,
-  } = data;
-
-  const props = { bride, groom, type, date, dateText, locationText, bgUrl, messageText, noteText } as any;
+  // Forward ALL styling/options so public page preserves user's choices
+  const props = data as any;
   const url = typeof window !== 'undefined' ? window.location.href : '';
   return <PublicInviteClient data={props} shareUrl={url} />;
 }
