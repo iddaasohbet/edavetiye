@@ -28,7 +28,7 @@ export async function POST(req: Request) {
     if (e && e.code === 'ER_DUP_ENTRY') {
       return NextResponse.json({ ok: false, error: "email_exists" }, { status: 409 });
     }
-    return NextResponse.json({ ok: false, error: "server" }, { status: 500 });
+    return NextResponse.json({ ok: false, error: "server", code: e?.code || null, message: e?.message || null }, { status: 500 });
   }
 }
 
