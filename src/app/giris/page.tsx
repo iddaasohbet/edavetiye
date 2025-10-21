@@ -15,11 +15,9 @@ export default function SigninPage() {
     if (!email || !password) return setError("E‑posta ve şifre gerekli");
     try {
       setLoading(true);
-      // Demo giriş: mevcut localStorage kullanıcısı yoksa oluştur
-      const raw = localStorage.getItem("demo_user");
-      if (!raw) {
-        localStorage.setItem("demo_user", JSON.stringify({ name: "Kullanıcı", email }));
-      }
+      const res = await fetch('/api/auth/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email, password }) });
+      const json = await res.json();
+      if (!res.ok || !json?.ok) { setError("E‑posta veya şifre hatalı"); return; }
       try { window.dispatchEvent(new CustomEvent("auth:changed")); } catch {}
       router.push("/");
     } finally {

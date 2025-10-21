@@ -26,9 +26,9 @@ export default function SignupPage() {
 
     try {
       setLoading(true);
-      // Demo kayıt: localStorage'a yaz ve ana sayfaya yönlendir
-      const user = { name: fullName, email };
-      localStorage.setItem("demo_user", JSON.stringify(user));
+      const res = await fetch('/api/auth/register', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: fullName, email, password }) });
+      const json = await res.json();
+      if (!res.ok || !json?.ok) { setError("Kayıt başarısız"); return; }
       try { window.dispatchEvent(new CustomEvent("auth:changed")); } catch {}
       router.push("/");
     } finally {
