@@ -7,6 +7,7 @@ import Testimonials from "./components/Testimonials";
 import FAQ from "./components/FAQ";
 import FinalCTA from "./components/FinalCTA";
 import { HeartHandshake, Diamond, Gem, Sparkles, PartyPopper, Cake } from "lucide-react";
+import { Suspense } from "react";
 export default function Home() {
   return (
     <div className="hero-bg relative isolate overflow-hidden">
@@ -84,8 +85,10 @@ export default function Home() {
       </section>
       {/* Interactive search + tabs + templates */}
       {/* @ts-expect-error Server Component boundary to client component */}
-      {/* Templates will be injected by the server wrapper below */}
-      <TemplatesFromServer />
+      {/* Wrap client that uses useSearchParams in Suspense per Next.js guidance */}
+      <Suspense fallback={<div className="mx-auto max-w-7xl px-6 py-12 text-white/60">Yükleniyor…</div>}>
+        <TemplatesFromServer />
+      </Suspense>
       <Features />
       <HowItWorks />
       <Testimonials />
