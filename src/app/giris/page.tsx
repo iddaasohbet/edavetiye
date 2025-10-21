@@ -18,6 +18,7 @@ export default function SigninPage() {
       const res = await fetch('/api/auth/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email, password }) });
       const json = await res.json();
       if (!res.ok || !json?.ok) { setError("E‑posta veya şifre hatalı"); return; }
+      try { localStorage.setItem('demo_user', JSON.stringify(json.user || { email })); } catch {}
       try { window.dispatchEvent(new CustomEvent("auth:changed")); } catch {}
       router.push("/");
     } finally {

@@ -11,13 +11,25 @@ export default function Navbar() {
   const menuRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const sync = () => {
+    const syncLocal = () => {
       try {
         const raw = localStorage.getItem("demo_user");
         setUser(raw ? JSON.parse(raw) : null);
-      } catch {}
+      } catch { setUser(null); }
     };
-    sync();
+    const syncRemote = async () => {
+      try {
+        const res = await fetch('/api/auth/me', { cache: 'no-store' });
+        const j = await res.json();
+        if (j?.user) {
+          setUser(j.user);
+          try { localStorage.setItem('demo_user', JSON.stringify(j.user)); } catch {}
+          return;
+        }
+      } catch {}
+      syncLocal();
+    };
+    syncRemote();
     const onAuthChanged = () => sync();
     const onFocus = () => sync();
     window.addEventListener("auth:changed", onAuthChanged as EventListener);
