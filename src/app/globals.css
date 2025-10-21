@@ -1,26 +1,74 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0b0b0b;
+  --foreground: #fafafa;
+  --brand: #e11d48; /* rose-600 */
+  --brand-700: #be123c;
+  --muted: #111113;
+  --card: #0f0f10;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-brand: var(--brand);
+  --color-brand-700: var(--brand-700);
+  --color-muted: var(--muted);
+  --color-card: var(--card);
+  --font-sans: var(--font-sans);
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #ffffff;
+    --foreground: #171717;
+    --muted: #f6f6f7;
+    --card: #ffffff;
   }
+}
+
+html, body {
+  height: 100%;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-feature-settings: "ss01" on, "ss02" on;
+  overflow-y: scroll; /* her sayfada scrollbar göster → header kayması olmasın */
+}
+
+/* smooth anchor scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Decorative world map motif for hero via radial gradient overlay */
+.hero-bg {
+  background-image:
+    radial-gradient(1200px 600px at 90% 10%, color-mix(in srgb, var(--brand) 30%, transparent) 0%, transparent 70%),
+    radial-gradient(1000px 500px at 10% 20%, color-mix(in srgb, var(--brand) 18%, transparent) 0%, transparent 70%),
+    linear-gradient(180deg, color-mix(in srgb, var(--brand) 14%, transparent), transparent 30%);
+}
+
+/* micro utilities */
+.shadow-soft {
+  box-shadow: 0 8px 24px rgba(0,0,0,.18);
+}
+
+/* simple ping animation */
+@keyframes ping {
+  75%, 100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+.animate-ping { animation: ping 1s cubic-bezier(0,0,0.2,1) infinite; }
+
+/* Print styles for invite-only area (PDF download) */
+@media print {
+  body { background: #ffffff; }
+  header, nav, footer { display: none !important; }
+  #invite-print-area { border: none !important; padding: 0 !important; box-shadow: none !important; }
 }
