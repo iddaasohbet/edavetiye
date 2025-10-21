@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import BuilderPage from "../page";
+import { Suspense } from "react";
 
 const TEMPLATE_LABELS: Record<string, { title: string; description: string }> = {
   "t-marble": { title: "Mermer Çiçek", description: "Mermer dokulu zarif çiçek tasarımıyla modern davetiye şablonu." },
@@ -47,7 +48,11 @@ export async function generateMetadata({ params }: { params: Promise<{ template:
 }
 
 export default function Page() {
-  return <BuilderPage />;
+  return (
+    <Suspense fallback={<div className="mx-auto max-w-7xl px-6 py-16 text-white/60">Yükleniyor…</div>}>
+      <BuilderPage />
+    </Suspense>
+  );
 }
 
 
