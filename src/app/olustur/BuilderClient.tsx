@@ -5,6 +5,17 @@ import TemplateDemo from "../components/TemplateDemo";
 import GooglePlacesAutocomplete from "../components/GooglePlacesAutocomplete";
 
 export default function BuilderClient() {
+  function toBase64Utf8(input: string) {
+    try {
+      if (typeof window !== 'undefined' && window.btoa) {
+        // Encode UTF-8 safely for btoa
+        // eslint-disable-next-line no-undef
+        return btoa(unescape(encodeURIComponent(input)));
+      }
+    } catch {}
+    // @ts-ignore
+    return Buffer.from(input, 'utf-8').toString('base64');
+  }
   const router = useRouter();
   const params = useSearchParams();
   const routeParams = useParams();
@@ -359,11 +370,15 @@ export default function BuilderClient() {
                         const idx = list2.findIndex((it: any) => it.createdAt === createdAt && it.bride === bride && it.groom === groom);
                         if (idx >= 0) { list2[idx] = { ...list2[idx], slug: json.slug }; localStorage.setItem('demo_invites', JSON.stringify(list2)); window.dispatchEvent(new CustomEvent('invites:changed')); }
                       } catch {}
-                      router.push(`/v/${json.slug}`);
+                      const enriched = { ...payload, slug: json.slug };
+                      const p = encodeURIComponent(toBase64Utf8(JSON.stringify(enriched)));
+                      router.push(`/v?p=${p}`);
                       return;
                     }
                   } catch {}
-                  router.push('/profil');
+                  // Fallback: geçici paylaşım bağlantısı p param ile
+                  const fallback = encodeURIComponent(toBase64Utf8(JSON.stringify(payload)));
+                  router.push(`/v?p=${fallback}`);
                 }} className="inline-flex h-10 items-center justify-center rounded-md bg-brand px-5 text-sm font-semibold text-white hover:bg-brand-700">Davetiyeyi Oluştur</button>
               )}
             </div>
