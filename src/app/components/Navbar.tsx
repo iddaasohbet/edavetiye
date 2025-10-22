@@ -150,12 +150,12 @@ export default function Navbar() {
       </div>
     </header>
     {mounted && open ? createPortal(
-      <div className="md:hidden fixed inset-0 z-[2147483647]" role="dialog" aria-modal="true">
+      <div className="fixed inset-0 z-[2147483647] md:hidden" role="dialog" aria-modal="true">
         {/* Backdrop */}
         <div className="absolute inset-0 bg-black/60" onClick={() => setOpen(false)} />
         {/* Right drawer */}
-        <div className="absolute right-0 top-0 h-full w-[86%] max-w-[380px] bg-card border-l border-white/10 shadow-2xl transition-transform duration-300 translate-x-0">
-          <div className="pt-[72px] px-6 py-4 grid gap-2 text-sm text-white/90">
+        <div className="absolute right-0 top-0 h-full w-[86%] max-w-[380px] bg-white text-black shadow-2xl transition-transform duration-300 translate-x-0">
+          <div className="pt-[72px] px-6 py-4 grid gap-2 text-sm">
           <Link href="/?all=1#sablonlar" className="px-3 py-2 rounded-lg hover:bg-white/10" onClick={() => setOpen(false)}>Şablonlar</Link>
           <Link href="#ozellikler" className="px-3 py-2 rounded-lg hover:bg-white/10" onClick={() => setOpen(false)}>Özellikler</Link>
           <Link href="#nasil" className="px-3 py-2 rounded-lg hover:bg-white/10" onClick={() => setOpen(false)}>Nasıl Çalışır</Link>
@@ -171,12 +171,11 @@ export default function Navbar() {
               <button onClick={() => { setOpen(false); logout(); }} className="text-left px-3 py-2 rounded-lg hover:bg-white/10">Çıkış Yap</button>
             </>
           )}
-          <Link href="/olustur" className="mt-2 inline-flex h-11 items-center justify-center rounded-full bg-white text-black font-bold shadow-md hover:shadow-lg transition" onClick={() => setOpen(false)}>
+          <Link href="/olustur" className="mt-2 inline-flex h-11 items-center justify-center rounded-full bg-black text-white font-bold shadow-md hover:shadow-lg transition" onClick={() => setOpen(false)}>
             Hemen Oluştur
           </Link>
-          <button onClick={() => setOpen(false)} className="mt-2 h-10 rounded-lg border border-white/20 text-white/80">Kapat</button>
+          <button onClick={() => setOpen(false)} className="mt-2 h-10 rounded-lg border border-black/20">Kapat</button>
           </div>
-        </div>
         </div>
       </div>, document.body) : null}
     </>
