@@ -18,9 +18,18 @@ type Props = {
 export default function TemplateGrid({ templates }: Props) {
   const [preview, setPreview] = useState<null | Template>(null);
   const params = useSearchParams();
-  const showAll = (params?.get("all") ?? "") !== "";
-  // Show 2 x 3 on mobile for full, clean layout
-  const perPage = 6;
+  const showAllParam = (params?.get("all") ?? "") !== "";
+  const [isDesktop, setIsDesktop] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 1024px)');
+    const listener = (e: MediaQueryListEvent | MediaQueryList) => setIsDesktop(('matches' in e ? e.matches : (e as MediaQueryList).matches));
+    listener(mq as unknown as MediaQueryList); // init
+    mq.addEventListener ? mq.addEventListener('change', listener as any) : mq.addListener(listener as any);
+    return () => { mq.removeEventListener ? mq.removeEventListener('change', listener as any) : mq.removeListener(listener as any); };
+  }, []);
+  // Behavior: Mobile -> show all; Desktop -> slider 4 per view
+  const perPage = isDesktop ? 4 : templates.length;
+  const showAll = showAllParam || !isDesktop;
   const totalPages = Math.max(1, Math.ceil(templates.length / perPage));
   const [page, setPage] = useState(0);
   const pauseRef = useRef(false);
@@ -72,12 +81,12 @@ export default function TemplateGrid({ templates }: Props) {
     <div id="sablonlar" className="mx-auto max-w-7xl px-6 py-12">
       {/* Üst başlık ve açıklama kaldırıldı */}
       <div
-        className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+        className={`grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4`}
         onMouseEnter={() => (pauseRef.current = true)}
         onMouseLeave={() => (pauseRef.current = false)}
       >
         {visible.map((t, i) => (
-          <article key={`${page}-${t.id}`} className="group overflow-hidden rounded-2xl border border-white/10 bg-card shadow-[0_8px_24px_rgba(0,0,0,.25)] hover:border-white/20 hover:shadow-[0_12px_28px_rgba(0,0,0,.3)] transition-all">
+          <article key={`${page}-${t.id}`} className="group relative overflow-hidden rounded-2xl border border-white/12 bg-card ring-1 ring-white/5 shadow-[0_8px_24px_rgba(0,0,0,.25)] transition-all hover:-translate-y-0.5 hover:border-white/25 hover:ring-white/15 hover:shadow-[0_16px_32px_rgba(0,0,0,.35)]">
             <div className="relative aspect-[9/14] overflow-hidden">
               {/* Sol kenar rozet */}
               {(() => {
