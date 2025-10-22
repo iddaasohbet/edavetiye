@@ -40,7 +40,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="tr" suppressHydrationWarning>
-      <body suppressHydrationWarning className={`${plusJakarta.variable} antialiased bg-background text-foreground`}> 
+      <body suppressHydrationWarning className={`${plusJakarta.variable} antialiased bg-background text-foreground`} style={{ WebkitTextSizeAdjust: '100%', colorScheme: 'dark' }}>
         <script
           type="application/ld+json"
           suppressHydrationWarning

@@ -7,6 +7,7 @@
   --brand-700: #be123c;
   --muted: #111113;
   --card: #0f0f10;
+  color-scheme: dark; /* force dark palette on iOS Safari to avoid auto light */
 }
 
 @theme inline {
@@ -19,14 +20,9 @@
   --font-sans: var(--font-sans);
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    --background: #ffffff;
-    --foreground: #171717;
-    --muted: #f6f6f7;
-    --card: #ffffff;
-  }
-}
+/* Force a consistent dark theme across devices (iOS Safari was flipping to light)
+@media (prefers-color-scheme: light) { }
+*/
 
 html, body {
   height: 100%;
