@@ -38,9 +38,6 @@ export default function Features() {
     <section id="ozellikler" className="mx-auto max-w-7xl px-6 py-16">
       <div className="flex items-center justify-between">
         <h2 className="text-2xl font-bold tracking-tight">Özellikler</h2>
-        <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1 text-[11px] text-white/80">
-          <span className="h-1.5 w-1.5 rounded-full bg-brand" /> PRO
-        </span>
       </div>
       <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {features.map((f) => {

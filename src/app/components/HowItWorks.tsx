@@ -10,7 +10,6 @@ export default function HowItWorks() {
     <section id="nasil" className="mx-auto max-w-7xl px-6 py-16">
       <div className="flex items-end justify-between">
         <h2 className="text-xl font-semibold">Nasıl Çalışır?</h2>
-        <span className="text-xs text-white/50">PRO</span>
       </div>
       <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
         {steps.map((s) => {

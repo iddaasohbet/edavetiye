@@ -26,7 +26,7 @@ export default function CookieConsent() {
 
   return (
     <div className="fixed bottom-4 left-4 z-[100]">
-      <div className="w-80 rounded-2xl border border-white/10 bg-card p-5 shadow-2xl backdrop-blur">
+      <div className="w-[22rem] rounded-2xl border border-white/10 bg-card p-5 shadow-2xl backdrop-blur">
         <div className="flex items-start gap-3">
           <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand/10 ring-1 ring-brand/20">
             <svg className="h-5 w-5 text-brand" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
@@ -36,7 +36,8 @@ export default function CookieConsent() {
           <div className="flex-1">
             <h3 className="text-sm font-semibold text-white">Çerez Tercihleri</h3>
             <p className="mt-1 text-xs leading-relaxed text-white/70">
-              Deneyimi geliştirmek için analitik çerezler kullanıyoruz. Tercihini aşağıdan belirleyebilirsin.
+              Deneyiminizi iyileştirmek için yalnızca gerekli ve analitik çerezleri kullanıyoruz.
+              <a href="/kullanim-sartlari" className="ml-1 underline">Detaylar</a>
             </p>
           </div>
         </div>
@@ -49,13 +50,13 @@ export default function CookieConsent() {
             onClick={handleReject}
             className="inline-flex h-9 items-center justify-center rounded-full border border-white/15 bg-white/5 px-4 text-xs font-semibold text-white/90 transition-all duration-200 hover:bg-white/10 active:scale-95"
           >
-            Reddet
+            Yalnızca Gerekli
           </button>
           <button
             onClick={handleAccept}
             className="inline-flex h-9 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-brand to-rose-600 px-5 text-xs font-semibold text-white shadow-lg shadow-brand/30 transition-all duration-200 hover:shadow-xl hover:shadow-brand/50 hover:scale-[1.02] active:scale-95"
           >
-            Kabul Et
+            Tümünü Kabul Et
           </button>
         </div>
       </div>
