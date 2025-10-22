@@ -137,32 +137,32 @@ export default function Navbar() {
           </svg>
         </button>
       </div>
-      {open && (
-        <div className="md:hidden fixed inset-x-0 top-[72px] bottom-0 z-40 border-t border-white/10 bg-background/95 backdrop-blur-xl overflow-y-auto">
-          <div className="px-6 py-4 grid gap-2 text-sm text-white/90">
-            <Link href="/?all=1#sablonlar" className="px-3 py-2 rounded-lg hover:bg-white/10">Şablonlar</Link>
-            <Link href="#ozellikler" className="px-3 py-2 rounded-lg hover:bg-white/10">Özellikler</Link>
-            <Link href="#nasil" className="px-3 py-2 rounded-lg hover:bg-white/10">Nasıl Çalışır</Link>
-            <div className="h-px bg-white/10 my-2" />
-            {/* Mobile auth quick actions */}
-            {!user ? (
-              <>
-                <Link href="/giris" className="px-3 py-2 rounded-lg hover:bg-white/10">Giriş Yap</Link>
-                <Link href="/kayit" className="px-3 py-2 rounded-lg hover:bg-white/10">Kayıt Ol</Link>
-              </>
-            ) : (
-              <>
-                <Link href="/profil" className="px-3 py-2 rounded-lg hover:bg-white/10">Profil</Link>
-                <button onClick={logout} className="text-left px-3 py-2 rounded-lg hover:bg-white/10">Çıkış Yap</button>
-              </>
-            )}
-            <Link href="/olustur" className="mt-2 inline-flex h-11 items-center justify-center rounded-full bg-white text-black font-bold shadow-md hover:shadow-lg transition">
-              Hemen Oluştur
-            </Link>
-          </div>
-        </div>
-      )}
     </header>
+    {open && (
+      <div className="md:hidden fixed inset-0 z-[60] bg-background/95 backdrop-blur-xl">
+        <div className="pt-[72px] px-6 py-4 grid gap-2 text-sm text-white/90">
+          <Link href="/?all=1#sablonlar" className="px-3 py-2 rounded-lg hover:bg-white/10" onClick={() => setOpen(false)}>Şablonlar</Link>
+          <Link href="#ozellikler" className="px-3 py-2 rounded-lg hover:bg-white/10" onClick={() => setOpen(false)}>Özellikler</Link>
+          <Link href="#nasil" className="px-3 py-2 rounded-lg hover:bg-white/10" onClick={() => setOpen(false)}>Nasıl Çalışır</Link>
+          <div className="h-px bg-white/10 my-2" />
+          {!user ? (
+            <>
+              <Link href="/giris" className="px-3 py-2 rounded-lg hover:bg-white/10" onClick={() => setOpen(false)}>Giriş Yap</Link>
+              <Link href="/kayit" className="px-3 py-2 rounded-lg hover:bg-white/10" onClick={() => setOpen(false)}>Kayıt Ol</Link>
+            </>
+          ) : (
+            <>
+              <Link href="/profil" className="px-3 py-2 rounded-lg hover:bg-white/10" onClick={() => setOpen(false)}>Profil</Link>
+              <button onClick={() => { setOpen(false); logout(); }} className="text-left px-3 py-2 rounded-lg hover:bg-white/10">Çıkış Yap</button>
+            </>
+          )}
+          <Link href="/olustur" className="mt-2 inline-flex h-11 items-center justify-center rounded-full bg-white text-black font-bold shadow-md hover:shadow-lg transition" onClick={() => setOpen(false)}>
+            Hemen Oluştur
+          </Link>
+          <button onClick={() => setOpen(false)} className="mt-2 h-10 rounded-lg border border-white/20 text-white/80">Kapat</button>
+        </div>
+      </div>
+    )}
   );
 }
 
