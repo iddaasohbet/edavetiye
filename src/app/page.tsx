@@ -42,7 +42,9 @@ export default function Home() {
 
           <div className="mt-16">
             <p className="text-sm text-white/50 font-medium mb-6">Popüler Kategoriler</p>
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 max-w-5xl mx-auto">
+            <div className="relative max-w-5xl mx-auto">
+              <div className="absolute inset-x-0 -top-3 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent animate-pulse" />
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
               <a href="/?cat=Düğün#sablonlar" className="group relative overflow-hidden rounded-2xl border border-white/15 bg-white/10 p-4 text-white/90 text-center hover:bg-white/15 transition-all">
                 <div className="mx-auto mb-2 flex h-9 w-9 items-center justify-center rounded-full bg-white/10 border border-white/15">
                   <HeartHandshake className="h-4 w-4" />
@@ -79,6 +81,8 @@ export default function Home() {
                 </div>
                 <div className="text-sm font-semibold">Doğum Günü</div>
               </a>
+              </div>
+              <div className="absolute inset-x-0 -bottom-3 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent animate-pulse" />
             </div>
           </div>
         </div>
