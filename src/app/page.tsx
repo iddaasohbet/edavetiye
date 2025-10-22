@@ -11,23 +11,16 @@ import { Suspense } from "react";
 export default function Home() {
   return (
     <div className="hero-bg relative isolate overflow-hidden">
-      <section className="mx-auto max-w-7xl px-6 pt-32 pb-24 sm:pt-40 sm:pb-32">
+      <section className="mx-auto max-w-7xl px-6 pt-20 pb-20 sm:pt-24 sm:pb-28">
         <div className="text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm text-white/90 backdrop-blur-xl shadow-black/10 shadow-lg">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-brand"></span>
-            </span>
-            <span className="font-medium">Kurumsal e‑Davetiye Platformu – Hızlı, Güvenilir, Şık</span>
-          </div>
-          <h1 className="mt-8 text-5xl font-extrabold tracking-tight sm:text-6xl md:text-7xl bg-gradient-to-b from-white via-white to-white/70 bg-clip-text text-transparent">
+          <h1 className="mt-2 text-5xl font-extrabold tracking-tight sm:text-6xl md:text-7xl bg-gradient-to-b from-white via-white to-white/70 bg-clip-text text-transparent">
             Profesyonel Dijital Davetiyeler
           </h1>
-          <p className="mt-4 text-xl text-white/80 max-w-3xl mx-auto leading-relaxed">
+          <p className="mt-3 text-xl text-white/80 max-w-3xl mx-auto leading-relaxed">
             Markanıza ve etkinliğinize yakışan kurumsal şablonlar. RSVP yönetimi, konum ve takvim
             entegrasyonları tek platformda.
           </p>
-          <p className="mt-2 text-sm text-white/60">Başlamak ücretsizdir, gelişmiş özellikler üyelikle.</p>
+          <p className="mt-1 text-sm text-white/60">Başlamak ücretsizdir, gelişmiş özellikler üyelikle.</p>
           <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
             <a href="/olustur" className="group relative inline-flex h-14 items-center px-8 rounded-full bg-white text-black text-base font-bold shadow-2xl shadow-white/20 hover:shadow-white/30 hover:scale-105 transition-all">
               <span>Hemen Başla</span>
