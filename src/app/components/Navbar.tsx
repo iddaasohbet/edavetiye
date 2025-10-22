@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -147,8 +148,8 @@ export default function Navbar() {
         </button>
       </div>
     </header>
-    {open && (
-      <div className="md:hidden fixed inset-0 z-[999] bg-black/80 backdrop-blur">
+    {mounted && open ? createPortal(
+      <div className="md:hidden fixed inset-0 z-[2147483647] bg-black/80 backdrop-blur" role="dialog" aria-modal="true">
         <div className="pt-[72px] px-6 py-4 grid gap-2 text-sm text-white/90">
           <Link href="/?all=1#sablonlar" className="px-3 py-2 rounded-lg hover:bg-white/10" onClick={() => setOpen(false)}>Şablonlar</Link>
           <Link href="#ozellikler" className="px-3 py-2 rounded-lg hover:bg-white/10" onClick={() => setOpen(false)}>Özellikler</Link>
@@ -170,8 +171,7 @@ export default function Navbar() {
           </Link>
           <button onClick={() => setOpen(false)} className="mt-2 h-10 rounded-lg border border-white/20 text-white/80">Kapat</button>
         </div>
-      </div>
-    )}
+      </div>, document.body) : null}
   );
 }
 
