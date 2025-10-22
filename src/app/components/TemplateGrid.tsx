@@ -19,7 +19,8 @@ export default function TemplateGrid({ templates }: Props) {
   const [preview, setPreview] = useState<null | Template>(null);
   const params = useSearchParams();
   const showAll = (params?.get("all") ?? "") !== "";
-  const perPage = 4;
+  // Show 2 x 3 on mobile for full, clean layout
+  const perPage = 6;
   const totalPages = Math.max(1, Math.ceil(templates.length / perPage));
   const [page, setPage] = useState(0);
   const pauseRef = useRef(false);
@@ -71,7 +72,7 @@ export default function TemplateGrid({ templates }: Props) {
     <div id="sablonlar" className="mx-auto max-w-7xl px-6 py-12">
       {/* Üst başlık ve açıklama kaldırıldı */}
       <div
-        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+        className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
         onMouseEnter={() => (pauseRef.current = true)}
         onMouseLeave={() => (pauseRef.current = false)}
       >
@@ -95,7 +96,7 @@ export default function TemplateGrid({ templates }: Props) {
                 alt={t.title}
                 fill
                 className="object-contain transition-transform duration-500 group-hover:scale-[1.03]"
-                sizes="(max-width: 768px) 100vw, 25vw"
+                sizes="(max-width: 640px) 50vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                 unoptimized
                 priority
               />
