@@ -150,8 +150,12 @@ export default function Navbar() {
       </div>
     </header>
     {mounted && open ? createPortal(
-      <div className="md:hidden fixed inset-0 z-[2147483647] bg-black/80 backdrop-blur" role="dialog" aria-modal="true">
-        <div className="pt-[72px] px-6 py-4 grid gap-2 text-sm text-white/90">
+      <div className="md:hidden fixed inset-0 z-[2147483647]" role="dialog" aria-modal="true">
+        {/* Backdrop */}
+        <div className="absolute inset-0 bg-black/60" onClick={() => setOpen(false)} />
+        {/* Right drawer */}
+        <div className="absolute right-0 top-0 h-full w-[86%] max-w-[380px] bg-card border-l border-white/10 shadow-2xl transition-transform duration-300 translate-x-0">
+          <div className="pt-[72px] px-6 py-4 grid gap-2 text-sm text-white/90">
           <Link href="/?all=1#sablonlar" className="px-3 py-2 rounded-lg hover:bg-white/10" onClick={() => setOpen(false)}>Şablonlar</Link>
           <Link href="#ozellikler" className="px-3 py-2 rounded-lg hover:bg-white/10" onClick={() => setOpen(false)}>Özellikler</Link>
           <Link href="#nasil" className="px-3 py-2 rounded-lg hover:bg-white/10" onClick={() => setOpen(false)}>Nasıl Çalışır</Link>
@@ -171,6 +175,8 @@ export default function Navbar() {
             Hemen Oluştur
           </Link>
           <button onClick={() => setOpen(false)} className="mt-2 h-10 rounded-lg border border-white/20 text-white/80">Kapat</button>
+          </div>
+        </div>
         </div>
       </div>, document.body) : null}
     </>
