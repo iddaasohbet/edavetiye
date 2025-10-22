@@ -63,6 +63,15 @@ export default function Navbar() {
 
   useEffect(() => { setMounted(true); }, []);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (open) {
+      const prev = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      return () => { document.body.style.overflow = prev; };
+    }
+  }, [open]);
+
   const fakeLogin = () => {
     const demo = { name: "Kullanıcı" };
     setUser(demo);
@@ -139,7 +148,7 @@ export default function Navbar() {
       </div>
     </header>
     {open && (
-      <div className="md:hidden fixed inset-0 z-[60] bg-background/95 backdrop-blur-xl">
+      <div className="md:hidden fixed inset-0 z-[999] bg-black/80 backdrop-blur">
         <div className="pt-[72px] px-6 py-4 grid gap-2 text-sm text-white/90">
           <Link href="/?all=1#sablonlar" className="px-3 py-2 rounded-lg hover:bg-white/10" onClick={() => setOpen(false)}>Şablonlar</Link>
           <Link href="#ozellikler" className="px-3 py-2 rounded-lg hover:bg-white/10" onClick={() => setOpen(false)}>Özellikler</Link>
