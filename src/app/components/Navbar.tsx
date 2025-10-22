@@ -29,7 +29,8 @@ export default function Navbar() {
       } catch {}
       syncLocal();
     };
-    syncRemote();
+    const sync = () => { void syncRemote(); };
+    sync();
     const onAuthChanged = () => sync();
     const onFocus = () => sync();
     window.addEventListener("auth:changed", onAuthChanged as EventListener);
@@ -68,7 +69,8 @@ export default function Navbar() {
     try { localStorage.setItem("demo_user", JSON.stringify(demo)); } catch {}
     setUserMenu(false);
   };
-  const logout = () => {
+  const logout = async () => {
+    try { await fetch('/api/auth/logout', { method: 'POST' }); } catch {}
     setUser(null);
     try { localStorage.removeItem("demo_user"); } catch {}
     try { window.dispatchEvent(new CustomEvent("auth:changed")); } catch {}
