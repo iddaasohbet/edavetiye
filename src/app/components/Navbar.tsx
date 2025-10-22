@@ -88,6 +88,7 @@ export default function Navbar() {
   };
   const headerClass = `sticky top-0 z-50 w-full transition-all ${mounted && scrolled ? 'bg-background/95 backdrop-blur-xl border-b border-white/15 shadow-lg shadow-black/10' : 'bg-background/70 backdrop-blur border-b border-white/10'}`;
   return (
+    <>
     <header suppressHydrationWarning className={headerClass}>
       <div className="mx-auto max-w-7xl px-6 h-[72px] flex items-center justify-between">
         <Link href="/" className="flex items-center gap-3 text-white">
@@ -172,6 +173,7 @@ export default function Navbar() {
           <button onClick={() => setOpen(false)} className="mt-2 h-10 rounded-lg border border-white/20 text-white/80">Kapat</button>
         </div>
       </div>, document.body) : null}
+    </>
   );
 }
 
